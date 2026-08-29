@@ -7,19 +7,21 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --primary-color: #0d6efd;
-            --primary-hover: #0b5ed7;
-            --dark-color: #1a1e21;
-            --light-bg: #f8f9fa;
+            --primary-gradient: linear-gradient(135deg, #0d6efd 0%, #0043a8 100%);
+            --accent-gold: #ffc107;
+            --dark-color: #0f172a;
+            --light-bg: #f8fafc;
             --card-bg: #ffffff;
-            --text-color: #212529;
-            --text-muted: #6c757d;
-            --border-radius: 12px;
-            --transition: all 0.3s ease;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --border-radius: 16px;
+            --box-shadow: 0 10px 30px -5px rgba(13, 110, 253, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -32,29 +34,42 @@
             font-family: 'Cairo', sans-serif;
             background-color: var(--light-bg);
             color: var(--text-color);
-            line-height: 1.7;
+            line-height: 1.8;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1140px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
+        }
+
+        /* Top Notification Bar */
+        .top-bar {
+            background: var(--primary-gradient);
+            color: #fff;
+            text-align: center;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
         /* Header / Navbar */
         header {
-            background-color: var(--card-bg);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 16px 0;
         }
 
         .logo-container {
@@ -65,28 +80,49 @@
         }
 
         .logo-img {
-            height: 45px;
+            height: 48px;
             width: auto;
             object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
 
         .logo-text {
             font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary-color);
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 28px;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-color);
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.05rem;
             transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -6px;
+            right: 0;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
@@ -95,112 +131,170 @@
 
         /* Hero Section */
         .hero {
-            padding: 50px 0;
+            padding: 60px 0 80px 0;
             text-align: center;
-            background: linear-gradient(180deg, #ffffff 0%, var(--light-bg) 100%);
+            position: relative;
+            background: radial-gradient(circle at 50% 0%, rgba(13, 110, 253, 0.05) 0%, rgba(248, 250, 252, 0) 70%);
         }
 
         .banner-container {
             width: 100%;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             overflow: hidden;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(13, 110, 253, 0.12);
+            border: 4px solid #ffffff;
         }
 
         .banner-img {
             width: 100%;
-            max-height: 380px;
+            max-height: 400px;
             object-fit: cover;
             display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .banner-container:hover .banner-img {
+            transform: scale(1.02);
         }
 
         .hero h1 {
-            font-size: 2.4rem;
-            font-weight: 800;
+            font-size: 2.8rem;
+            font-weight: 900;
             color: var(--dark-color);
             margin-bottom: 20px;
+            line-height: 1.3;
         }
 
         .hero-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--text-muted);
             max-width: 850px;
-            margin: 0 auto 30px auto;
+            margin: 0 auto 35px auto;
+            font-weight: 600;
         }
 
         .btn-primary {
-            display: inline-block;
-            background-color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary-gradient);
             color: #fff;
-            padding: 12px 30px;
-            border-radius: var(--border-radius);
+            padding: 16px 36px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 25px rgba(13, 110, 253, 0.3);
             transition: var(--transition);
         }
 
         .btn-primary:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(13, 110, 253, 0.45);
         }
 
         /* Section Titles */
-        .section-title {
+        .section-header {
             text-align: center;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 50px;
+        }
+
+        .section-badge {
+            background-color: rgba(13, 110, 253, 0.1);
+            color: var(--primary-color);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
             color: var(--dark-color);
         }
 
         .section-subtitle {
-            text-align: center;
             color: var(--text-muted);
-            margin-bottom: 40px;
+            font-size: 1.1rem;
+            margin-top: 8px;
         }
 
         /* General Sections */
         section {
-            padding: 60px 0;
+            padding: 80px 0;
         }
 
         /* Cards & Grid */
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
 
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 30px;
         }
 
         .card {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            border: 1px solid rgba(0,0,0,0.05);
+            padding: 40px 30px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-gradient);
+            opacity: 0;
             transition: var(--transition);
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(13, 110, 253, 0.15);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon-wrapper {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.1) 0%, rgba(13, 110, 253, 0.03) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 24px;
         }
 
         .card h3 {
-            font-size: 1.4rem;
-            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark-color);
             margin-bottom: 15px;
         }
 
-        .card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+        .card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
         }
 
         /* Footer */
@@ -208,31 +302,39 @@
             background-color: var(--dark-color);
             color: #fff;
             text-align: center;
-            padding: 30px 0;
-            margin-top: 40px;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 4px solid var(--primary-color);
         }
 
         footer p {
-            color: #adb5bd;
+            color: #94a3b8;
+            font-size: 1rem;
+            font-weight: 600;
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 1.8rem; }
-            .hero-subtitle { font-size: 1rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero-subtitle { font-size: 1.1rem; }
             .nav-links { display: none; }
-            .banner-img { max-height: 220px; }
+            .banner-img { max-height: 240px; }
+            .card { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        🚀 مرحباً بكم في منصة توعية الرسمية لتمكين الشباب التونسي
+    </div>
 
     <!-- Header / Navbar -->
     <header>
         <div class="container">
             <nav>
                 <a href="#" class="logo-container">
-                    <!-- تم ربط اللوجو المرفوع عندك مباشرة -->
-                    <img src="tawiya-logo-icon(2).svg" alt="شعار توعية" class="logo-img" onerror="this.style.display='none'">
+                    <img src="tawiya-logo-icon (2).svg" alt="شعار توعية" class="logo-img" onerror="this.style.display='none'">
                     <span class="logo-text">توعية TAWIYA</span>
                 </a>
                 <ul class="nav-links">
@@ -247,33 +349,37 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <!-- صورة الغلاف Bannière -->
             <div class="banner-container">
-                <!-- إذا رفعت صورة الغلاف باسم banner.jpg ستظهر هنا تلقائياً -->
-                <img src="banner.jpg" alt="غلاف مشروع توعية" class="banner-jpg" onerror="this.parentElement.style.display='none'">
+                <img src="banner.jpg" alt="غلاف مشروع توعية" class="banner-img" onerror="this.parentElement.style.display='none'">
             </div>
 
             <h1>مشروع توعية وتمكين اقتصادي للشباب التونسي</h1>
             <p class="hero-subtitle">
                 بيئة تمكينية تهدف لتطوير التفكير الشبابي، وصقل المهارات الحية، وتقديم استشارات رقمية تفتح آفاق الاستقلالية المادية وسوق العمل الحديث.
             </p>
-            <a href="#about" class="btn-primary">اكتشف خدماتنا</a>
+            <a href="#about" class="btn-primary">
+                <span>اكتشف خدماتنا</span>
+                <span>←</span>
+            </a>
         </div>
     </section>
 
     <!-- Vision & Mission Section -->
     <section id="vision">
         <div class="container">
-            <h2 class="section-title">الرؤية والرسالة</h2>
-            <p class="section-subtitle">منهجنا ونظرتنا نحو المستقبل</p>
+            <div class="section-header">
+                <span class="section-badge">منهجنا</span>
+                <h2 class="section-title">الرؤية والرسالة</h2>
+                <p class="section-subtitle">نظرتنا ونشاطنا نحو صناعة المستقبل</p>
+            </div>
             <div class="grid-2">
                 <div class="card">
-                    <div class="icon">👁️</div>
+                    <div class="card-icon-wrapper">👁️</div>
                     <h3>الرؤية</h3>
                     <p>بناء جيل شبابي واعٍ ومبتكر، يمتلك فكراً ريادياً مهارياً ويمتلك أدوات العصر لتحقيق الاستقلالية المادية وصناعة فرصه بنفسه.</p>
                 </div>
                 <div class="card">
-                    <div class="icon">🎯</div>
+                    <div class="card-icon-wrapper">🎯</div>
                     <h3>الرسالة</h3>
                     <p>تقديم دورات تدريبية مكثفة ودعم مستمر لتطوير مهارات التفكير والعمل، إلى جانب استشارات رقمية متخصصة تُساعد كل شاب على تحويل شغفه ومهاراته إلى مصدر دخل ثابت ومستدام.</p>
                 </div>
@@ -282,11 +388,14 @@
     </section>
 
     <!-- Project Overview -->
-    <section id="about" style="background-color: #fff;">
+    <section id="about" style="background-color: #ffffff;">
         <div class="container">
-            <h2 class="section-title">نظرة عامة على المشروع</h2>
-            <div class="card" style="text-align: center; max-width: 900px; margin: 0 auto;">
-                <p style="font-size: 1.1rem; color: var(--text-color);">
+            <div class="section-header">
+                <span class="section-badge">تعرّف علينا</span>
+                <h2 class="section-title">نظرة عامة على المشروع</h2>
+            </div>
+            <div class="card" style="text-align: center; max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);">
+                <p style="font-size: 1.2rem; color: var(--text-color); font-weight: 600;">
                     مشروع تجمع فيه بين التدريب العملي والاستشارات الرقمية؛ لنوفر مساراً واضحاً للشباب التونسي للانتقال من مرحلة التعلم إلى مرحلة كسب الدخل، وتطوير عقلية قادرة على التكيف والنجاح.
                 </p>
             </div>
@@ -296,27 +405,27 @@
     <!-- Payment & Services Section -->
     <section id="pricing">
         <div class="container">
-            <h2 class="section-title">طرق الدفع والإستخلاص</h2>
-            <p class="section-subtitle">نوفر خيارات دفع مرنة وآمنة لتسهيل التحاقك بالدورات وحجز الاستشارات الرقمية</p>
+            <div class="section-header">
+                <span class="section-badge">معاملات آمنة</span>
+                <h2 class="section-title">طرق الدفع والإستخلاص</h2>
+                <p class="section-subtitle">نوفر خيارات دفع مرنة وآمنة لتسهيل التحاقك بالدورات وحجز الاستشارات الرقمية</p>
+            </div>
 
             <div class="grid-3">
-                <!-- D17 / Mandat -->
                 <div class="card" style="text-align: center;">
-                    <div class="icon">📱</div>
+                    <div class="card-icon-wrapper" style="margin: 0 auto 24px auto;">📱</div>
                     <h3>تطبيق D17 / حوالة بريدية</h3>
                     <p>الدفع السريع والمباشر عبر تطبيق D17 الخاص بالبريد التونسي أو عن طريق حوالة بريدية (Mandat Minute).</p>
                 </div>
 
-                <!-- Bank Transfer -->
                 <div class="card" style="text-align: center;">
-                    <div class="icon">🏦</div>
+                    <div class="card-icon-wrapper" style="margin: 0 auto 24px auto;">🏦</div>
                     <h3>تحويل بنكي (Virement)</h3>
                     <p>إمكانية الدفع عبر تحويل بنكي مباشر إلى حسابنا البنكي، مع الاستظهار بـ (Reçu) التأكيد.</p>
                 </div>
 
-                <!-- Cash Payment -->
                 <div class="card" style="text-align: center;">
-                    <div class="icon">🤝</div>
+                    <div class="card-icon-wrapper" style="margin: 0 auto 24px auto;">🤝</div>
                     <h3>دفع مباشر (نقداً)</h3>
                     <p>الدفع نقداً عند الحضور المباشر للدورات التدريبية أو المقابلات الاستشارية.</p>
                 </div>
