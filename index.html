@@ -19,9 +19,13 @@
             --card-bg: #ffffff;
             --text-color: #1e293b;
             --text-muted: #64748b;
-            --border-radius: 16px;
+            --border-radius: 20px;
             --box-shadow: 0 10px 30px -5px rgba(13, 110, 253, 0.08);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         * {
@@ -44,20 +48,28 @@
             padding: 0 24px;
         }
 
-        /* Top Notification Bar */
+        /* Top Notification Bar Keyframes */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+        }
+
         .top-bar {
             background: var(--primary-gradient);
             color: #fff;
             text-align: center;
-            padding: 8px 15px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            padding: 9px 15px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            animation: pulseGlow 3s infinite ease-in-out;
+            letter-spacing: 0.3px;
         }
 
         /* Header / Navbar */
         header {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             position: sticky;
             top: 0;
@@ -77,13 +89,18 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo-container:hover {
+            transform: scale(1.03);
         }
 
         .logo-img {
             height: 48px;
             width: auto;
             object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 4px 6px rgba(13, 110, 253, 0.15));
         }
 
         .logo-text {
@@ -107,6 +124,7 @@
             font-size: 1.05rem;
             transition: var(--transition);
             position: relative;
+            padding: 4px 0;
         }
 
         .nav-links a::after {
@@ -114,7 +132,7 @@
             position: absolute;
             width: 0;
             height: 3px;
-            bottom: -6px;
+            bottom: -2px;
             right: 0;
             background: var(--primary-gradient);
             border-radius: 2px;
@@ -129,12 +147,32 @@
             color: var(--primary-color);
         }
 
-        /* Hero Section */
+        /* Hero Section Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
         .hero {
             padding: 60px 0 80px 0;
             text-align: center;
             position: relative;
-            background: radial-gradient(circle at 50% 0%, rgba(13, 110, 253, 0.05) 0%, rgba(248, 250, 252, 0) 70%);
+            background: radial-gradient(circle at 50% 0%, rgba(13, 110, 253, 0.08) 0%, rgba(248, 250, 252, 0) 75%);
+        }
+
+        .hero-content {
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
         .banner-container {
@@ -142,8 +180,9 @@
             margin-bottom: 35px;
             overflow: hidden;
             border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(13, 110, 253, 0.12);
+            box-shadow: 0 20px 45px rgba(13, 110, 253, 0.15);
             border: 4px solid #ffffff;
+            animation: floatImage 6s ease-in-out infinite;
         }
 
         .banner-img {
@@ -151,11 +190,11 @@
             max-height: 400px;
             object-fit: cover;
             display: block;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
         }
 
         .banner-container:hover .banner-img {
-            transform: scale(1.02);
+            transform: scale(1.04);
         }
 
         .hero h1 {
@@ -174,27 +213,64 @@
             font-weight: 600;
         }
 
+        /* Button Hover Animations */
         .btn-primary {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             background: var(--primary-gradient);
             color: #fff;
-            padding: 16px 36px;
+            padding: 16px 38px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 800;
             font-size: 1.1rem;
             box-shadow: 0 10px 25px rgba(13, 110, 253, 0.3);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
         }
 
         .btn-primary:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px) scale(1.02);
             box-shadow: 0 15px 35px rgba(13, 110, 253, 0.45);
         }
 
-        /* Section Titles */
+        .btn-primary .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover .arrow {
+            transform: translateX(-5px);
+        }
+
+        /* Section Titles & Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .section-header {
             text-align: center;
             margin-bottom: 50px;
@@ -203,7 +279,7 @@
         .section-badge {
             background-color: rgba(13, 110, 253, 0.1);
             color: var(--primary-color);
-            padding: 6px 16px;
+            padding: 6px 18px;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 800;
@@ -228,7 +304,7 @@
             padding: 80px 0;
         }
 
-        /* Cards & Grid */
+        /* Cards & Grid Animations */
         .grid-2 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -265,12 +341,18 @@
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px -10px rgba(13, 110, 253, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 45px -10px rgba(13, 110, 253, 0.18);
         }
 
         .card:hover::before {
             opacity: 1;
+        }
+
+        /* Icon Pulse Animation */
+        @keyframes iconBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .card-icon-wrapper {
@@ -283,6 +365,13 @@
             justify-content: center;
             font-size: 2rem;
             margin-bottom: 24px;
+            transition: var(--transition);
+        }
+
+        .card:hover .card-icon-wrapper {
+            animation: iconBounce 0.6s ease-in-out;
+            background: var(--primary-gradient);
+            color: #fff;
         }
 
         .card h3 {
@@ -348,7 +437,7 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
+        <div class="container hero-content">
             <div class="banner-container">
                 <img src="banner.jpg" alt="غلاف مشروع توعية" class="banner-img" onerror="this.parentElement.style.display='none'">
             </div>
@@ -359,7 +448,7 @@
             </p>
             <a href="#about" class="btn-primary">
                 <span>اكتشف خدماتنا</span>
-                <span>←</span>
+                <span class="arrow">←</span>
             </a>
         </div>
     </section>
@@ -367,18 +456,18 @@
     <!-- Vision & Mission Section -->
     <section id="vision">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <span class="section-badge">منهجنا</span>
                 <h2 class="section-title">الرؤية والرسالة</h2>
                 <p class="section-subtitle">نظرتنا ونشاطنا نحو صناعة المستقبل</p>
             </div>
             <div class="grid-2">
-                <div class="card">
+                <div class="card reveal">
                     <div class="card-icon-wrapper">👁️</div>
                     <h3>الرؤية</h3>
                     <p>بناء جيل شبابي واعٍ ومبتكر، يمتلك فكراً ريادياً مهارياً ويمتلك أدوات العصر لتحقيق الاستقلالية المادية وصناعة فرصه بنفسه.</p>
                 </div>
-                <div class="card">
+                <div class="card reveal">
                     <div class="card-icon-wrapper">🎯</div>
                     <h3>الرسالة</h3>
                     <p>تقديم دورات تدريبية مكثفة ودعم مستمر لتطوير مهارات التفكير والعمل، إلى جانب استشارات رقمية متخصصة تُساعد كل شاب على تحويل شغفه ومهاراته إلى مصدر دخل ثابت ومستدام.</p>
@@ -390,11 +479,11 @@
     <!-- Project Overview -->
     <section id="about" style="background-color: #ffffff;">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <span class="section-badge">تعرّف علينا</span>
                 <h2 class="section-title">نظرة عامة على المشروع</h2>
             </div>
-            <div class="card" style="text-align: center; max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);">
+            <div class="card reveal" style="text-align: center; max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);">
                 <p style="font-size: 1.2rem; color: var(--text-color); font-weight: 600;">
                     مشروع تجمع فيه بين التدريب العملي والاستشارات الرقمية؛ لنوفر مساراً واضحاً للشباب التونسي للانتقال من مرحلة التعلم إلى مرحلة كسب الدخل، وتطوير عقلية قادرة على التكيف والنجاح.
                 </p>
@@ -405,26 +494,26 @@
     <!-- Payment & Services Section -->
     <section id="pricing">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <span class="section-badge">معاملات آمنة</span>
                 <h2 class="section-title">طرق الدفع والإستخلاص</h2>
                 <p class="section-subtitle">نوفر خيارات دفع مرنة وآمنة لتسهيل التحاقك بالدورات وحجز الاستشارات الرقمية</p>
             </div>
 
             <div class="grid-3">
-                <div class="card" style="text-align: center;">
+                <div class="card reveal" style="text-align: center;">
                     <div class="card-icon-wrapper" style="margin: 0 auto 24px auto;">📱</div>
                     <h3>تطبيق D17 / حوالة بريدية</h3>
                     <p>الدفع السريع والمباشر عبر تطبيق D17 الخاص بالبريد التونسي أو عن طريق حوالة بريدية (Mandat Minute).</p>
                 </div>
 
-                <div class="card" style="text-align: center;">
+                <div class="card reveal" style="text-align: center;">
                     <div class="card-icon-wrapper" style="margin: 0 auto 24px auto;">🏦</div>
                     <h3>تحويل بنكي (Virement)</h3>
                     <p>إمكانية الدفع عبر تحويل بنكي مباشر إلى حسابنا البنكي، مع الاستظهار بـ (Reçu) التأكيد.</p>
                 </div>
 
-                <div class="card" style="text-align: center;">
+                <div class="card reveal" style="text-align: center;">
                     <div class="card-icon-wrapper" style="margin: 0 auto 24px auto;">🤝</div>
                     <h3>دفع مباشر (نقداً)</h3>
                     <p>الدفع نقداً عند الحضور المباشر للدورات التدريبية أو المقابلات الاستشارية.</p>
@@ -440,5 +529,24 @@
         </div>
     </footer>
 
+    <!-- JavaScript For Scroll Reveal Animations -->
+    <script>
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+            const elementVisible = 100;
+
+            reveals.forEach((element) => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        // Initial check on load
+        revealOnScroll();
+    </script>
 </body>
 </html>
