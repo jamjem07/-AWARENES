@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>توعية | TAWIYA - مشروع تمكين اقتصادي للشباب التونسي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --gold-primary: #C5A059;
+      --gold-light: #DFBE80;
+      --dark-primary: #191919;
+      --dark-secondary: #242424;
+      --text-main: #2D3748;
+      --text-muted: #718096;
+      --bg-light: #FAFAFC;
+      --bg-white: #FFFFFF;
+      --border-color: #E2E8F0;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--bg-white);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--dark-primary);
+    }
+
+    .logo-img {
+      height: 45px;
+      width: auto;
+    }
+
+    .logo-text h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--dark-primary);
+      line-height: 1.1;
+    }
+
+    .logo-text span {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: var(--gold-primary);
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-primary);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-light) 100%);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background-color: rgba(197, 160, 89, 0.12);
+      color: var(--gold-primary);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .hero h2 {
+      font-size: 2.8rem;
+      color: var(--dark-primary);
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 750px;
+      margin: 0 auto 32px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background-color: var(--dark-primary);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--gold-primary);
+      transform: translateY(-2px);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 60px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-title h3 {
+      font-size: 2rem;
+      color: var(--dark-primary);
+      font-weight: 800;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h3::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background-color: var(--gold-primary);
+      border-radius: 2px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+    }
+
+    .card {
+      background: var(--bg-white);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+    }
+
+    .card h4 {
+      font-size: 1.3rem;
+      color: var(--dark-primary);
+      margin-bottom: 16px;
+    }
+
+    .card ul {
+      list-style: none;
+    }
+
+    .card ul li {
+      margin-bottom: 12px;
+      position: relative;
+      padding-right: 20px;
+    }
+
+    .card ul li::before {
+      content: '•';
+      color: var(--gold-primary);
+      font-weight: bold;
+      font-size: 1.4rem;
+      position: absolute;
+      right: 0;
+      top: -3px;
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--bg-white);
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid var(--border-color);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+      border-color: var(--gold-primary);
+    }
+
+    .service-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gold-primary);
+      margin-bottom: 12px;
+    }
+
+    .service-card h4 {
+      font-size: 1.25rem;
+      color: var(--dark-primary);
+      margin-bottom: 12px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark-primary);
+      color: #fff;
+      padding: 40px 0 20px;
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 24px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo {
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .footer-logo span {
+      color: var(--gold-primary);
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 { font-size: 2rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo-container">
+          <svg class="logo-img" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 230,120 A 70,70 0 1,1 185,215" stroke="#C5A059" stroke-width="26" stroke-linecap="round" fill="none"/>
+            <circle cx="230" cy="170" r="30" fill="#C5A059" />
+            <rect x="260" y="250" width="30" height="50" rx="10" fill="#191919" />
+            <rect x="305" y="205" width="30" height="95" rx="10" fill="#191919" />
+            <rect x="350" y="160" width="30" height="140" rx="10" fill="#191919" />
+            <line x1="150" y1="360" x2="350" y2="360" stroke="#DFBE80" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+          <div class="logo-text">
+            <h1>توعية</h1>
+            <span>TAWIYA</span>
+          </div>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#about">عن المشروع</a></li>
+          <li><a href="#problem">الإشكالية</a></li>
+          <li><a href="#services">الخدمات</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <span class="badge">٢٠٢٦ • تونس</span>
+      <h2>مشروع توعية وتمكين اقتصادي للشباب التونسي</h2>
+      <p>بيئة جديدة تشجع على الاستقلالية المادية وتغيير طريقة التفكير تجاه العمل والمهارات الرقمية.</p>
+      <a href="#services" class="btn">اكتشف خدماتنا</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="grid-2">
+        <div class="card">
+          <h4>نظرة عامة على المشروع</h4>
+          <p>مشروع يجمع بين التكوين، الاستشارة، والخدمات التقنية (خاصة المونتاج) يوفر مساراً واضحاً: تعلّم، تطبيق، ثم كسب دخل حقيقي.</p>
+        </div>
+        <div class="card">
+          <h4>الرؤية والرسالة</h4>
+          <p><strong>الرؤية:</strong> جيل تونسي واثق من نفسه، قادر يخلق دخل خاص بيه من مهاراته.</p>
+          <br>
+          <p><strong>الرسالة:</strong> توفير تكوين وخدمات ومرافقة عملية تحول أي شاب مهتم إلى صاحب مهارة مطلوبة في السوق.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-title">
+        <h3>خدمات المشروع الأساسية</h3>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-num">٠١</div>
+          <h4>التكوين (Formations)</h4>
+          <p>ورشات عملية في المونتاج، التصميم، والتسويق الرقمي وتطوير طريقة التفكير (Mindset).</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">٠٢</div>
+          <h4>الاستشارات</h4>
+          <p>جلسات فردية وجماعية لبناء البورتفوليو، تسعير الخدمات، والتواصل مع أول العملاء.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">٠٣</div>
+          <h4>خدمة المونتاج (Video Editing)</h4>
+          <p>وحدة إنتاج تشغّل الشباب المتكوّنين كـ freelancers على مشاريع حقيقية.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">٠٤</div>
+          <h4>البراندينغ (Branding)</h4>
+          <p>بناء الهوية البصرية الكاملة للمشاريع: لوقو، ألوان، واستراتيجية العلامة التجارية.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">٠٥</div>
+          <h4>Business-in-a-Box</h4>
+          <p>دراسة السوق وخلق فكرة مشروع كاملة ومدروسة كـ"مشروع جاهز للانطلاق".</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          توعية | <span>AWARENESS</span>
+        </div>
+        <p>مشروع تمكين اقتصادي للشباب التونسي — 2026</p>
+      </div>
+      <div class="copyright">
+        &copy; 2026 جميع الحقوق محفوظة لمشروع توعية.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
