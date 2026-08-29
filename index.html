@@ -48,7 +48,7 @@
             padding: 0 24px;
         }
 
-        /* Top Notification Bar Keyframes */
+        /* Top Bar Keyframes */
         @keyframes pulseGlow {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.85; }
@@ -114,14 +114,14 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 28px;
+            gap: 20px;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-color);
             font-weight: 700;
-            font-size: 1.05rem;
+            font-size: 1rem;
             transition: var(--transition);
             position: relative;
             padding: 4px 0;
@@ -147,7 +147,7 @@
             color: var(--primary-color);
         }
 
-        /* Hero Section Animations */
+        /* Hero Section */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -213,7 +213,7 @@
             font-weight: 600;
         }
 
-        /* Button Hover Animations */
+        /* Buttons */
         .btn-primary {
             display: inline-flex;
             align-items: center;
@@ -259,7 +259,7 @@
             transform: translateX(-5px);
         }
 
-        /* Section Titles & Scroll Animations */
+        /* Scroll Animations */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -304,7 +304,7 @@
             padding: 80px 0;
         }
 
-        /* Cards & Grid Animations */
+        /* Cards Grid */
         .grid-2 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -320,12 +320,14 @@
         .card {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 40px 30px;
+            padding: 35px 28px;
             box-shadow: var(--box-shadow);
             border: 1px solid rgba(226, 232, 240, 0.8);
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .card::before {
@@ -349,22 +351,21 @@
             opacity: 1;
         }
 
-        /* Icon Pulse Animation */
         @keyframes iconBounce {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
 
         .card-icon-wrapper {
-            width: 70px;
-            height: 70px;
+            width: 65px;
+            height: 65px;
             background: linear-gradient(135deg, rgba(13, 110, 253, 0.1) 0%, rgba(13, 110, 253, 0.03) 100%);
-            border-radius: 20px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 24px;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
             transition: var(--transition);
         }
 
@@ -375,15 +376,55 @@
         }
 
         .card h3 {
-            font-size: 1.5rem;
+            font-size: 1.45rem;
             font-weight: 800;
             color: var(--dark-color);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .card p {
             color: var(--text-muted);
-            font-size: 1.05rem;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .custom-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .custom-list li {
+            position: relative;
+            padding-right: 22px;
+            margin-bottom: 10px;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .custom-list li::before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: var(--primary-color);
+            font-weight: 900;
+        }
+
+        .service-tag {
+            align-self: flex-start;
+            margin-top: auto;
+            padding: 5px 14px;
+            background: rgba(13, 110, 253, 0.08);
+            color: var(--primary-color);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 800;
+        }
+
+        /* Business in a box highlight card */
+        .box-featured {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+            border: 2px solid rgba(13, 110, 253, 0.3);
         }
 
         /* Footer */
@@ -407,7 +448,7 @@
             .hero-subtitle { font-size: 1.1rem; }
             .nav-links { display: none; }
             .banner-img { max-height: 240px; }
-            .card { padding: 30px 20px; }
+            .card { padding: 25px 20px; }
         }
     </style>
 </head>
@@ -424,10 +465,11 @@
             <nav>
                 <a href="#" class="logo-container">
                     <img src="tawiya-logo-icon (2).svg" alt="شعار توعية" class="logo-img" onerror="this.style.display='none'">
-                    <span class="logo-text">توعية AWARENESS</span>
+                    <span class="logo-text">توعية TAWIYA</span>
                 </a>
                 <ul class="nav-links">
                     <li><a href="#about">عن المشروع</a></li>
+                    <li><a href="#services">مجالاتنا وخدماتنا</a></li>
                     <li><a href="#vision">الرؤية والرسالة</a></li>
                     <li><a href="#pricing">طرق الإستخلاص</a></li>
                 </ul>
@@ -442,19 +484,112 @@
                 <img src="banner.jpg" alt="غلاف مشروع توعية" class="banner-img" onerror="this.parentElement.style.display='none'">
             </div>
 
-            <h1>مشروع توعية وتمكين معرفي و رقمي للشباب التونسي</h1>
+            <h1>مشروع توعية وتمكين معرفي رقمي للشباب التونسي</h1>
             <p class="hero-subtitle">
-                بيئة تمكينية تهدف لتطوير التفكير الشبابي، وصقل المهارات الحية، وتقديم استشارات رقمية تفتح آفاق الاستقلالية المادية وسوق العمل الحديث.
+                بيئة تمكينية تهدف لتطوير التفكير الشبابي، وصقل المهارات الحية، وتقديم استشارات وحلول رقمية تفتح آفاق الاستقلالية المادية وسوق العمل الحديث.
             </p>
-            <a href="#about" class="btn-primary">
-                <span>اكتشف خدماتنا</span>
+            <a href="#services" class="btn-primary">
+                <span>استكشف مجالاتنا</span>
                 <span class="arrow">←</span>
             </a>
         </div>
     </section>
 
+    <!-- Project Overview -->
+    <section id="about" style="background-color: #ffffff;">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-badge">تعرّف علينا</span>
+                <h2 class="section-title">نظرة عامة على المشروع</h2>
+            </div>
+            <div class="card reveal" style="text-align: center; max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);">
+                <p style="font-size: 1.2rem; color: var(--text-color); font-weight: 600;">
+                    مشروع تجمع فيه بين التدريب العملي والاستشارات الرقمية؛ لنوفر مساراً واضحاً للشباب التونسي للانتقال من مرحلة التعلم إلى مرحلة كسب الدخل، وتطوير عقلية قادرة على التكيف والنجاح.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES & DEPARTMENTS SECTION -->
+    <section id="services">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-badge">مجالات العمل والخدمات</span>
+                <h2 class="section-title">أقسام ومجالات مشروع توعية</h2>
+                <p class="section-subtitle">منظومة متكاملة لدعم الشباب والمشاريع من التفكير إلى التنفيذ</p>
+            </div>
+
+            <div class="grid-3">
+                <!-- 1. Coaching & Consultation -->
+                <div class="card reveal">
+                    <div class="card-icon-wrapper">🤝</div>
+                    <h3>قسم الإستشارات والمرافقة</h3>
+                    <p>مرافقة شاملة ومباشرة للشباب لرسم خطط عملية واضحة للنجاح:</p>
+                    <ul class="custom-list">
+                        <li>جلسات فردية وجماعية لمرافقة الشاب في اختيار مساره ووضع خطة عمل.</li>
+                        <li>المساعدة في تفسير الخدمات والقدرة على التواصل الفعّال.</li>
+                        <li>متابعة دورية لقياس التقدم وتصحيح المسار باستمرار.</li>
+                    </ul>
+                    <span class="service-tag">Coaching & Guidance</span>
+                </div>
+
+                <!-- 2. Mindset Formation -->
+                <div class="card reveal">
+                    <div class="card-icon-wrapper">🧠</div>
+                    <h3>قسم تكوين العقلية (Mindset)</h3>
+                    <p>بناء الشخصية القيادية والعقلية المرنة القادرة على الإنتاج والمواجهة:</p>
+                    <ul class="custom-list">
+                        <li>تطوير مستوى الانضباط الشخصي والالتزام بالنتائج.</li>
+                        <li>إدارة الوقت والتخطيط الشخصي للإنتاجية.</li>
+                        <li>فن التعامل مع الفشل وتحويل التحديات إلى فرص.</li>
+                    </ul>
+                    <span class="service-tag">Mindset & Growth</span>
+                </div>
+
+                <!-- 3. Video Editing Services -->
+                <div class="card reveal">
+                    <div class="card-icon-wrapper">🎬</div>
+                    <h3>قسم خدمات المونتاج</h3>
+                    <p>وحدة إنتاج داخلية متخصصة في صناعة وتعديل الفيديو الجذاب للعملاء:</p>
+                    <ul class="custom-list">
+                        <li>إنتاج وتعديل فيديوهات وسائل التواصل الاجتماعي (Shorts/Reels).</li>
+                        <li>صناعة الفيديوهات الإعلانية الاحترافية.</li>
+                        <li>مونتاج وصناعة محتوى الـ Gaming والترفيه.</li>
+                    </ul>
+                    <span class="service-tag">Video Production</span>
+                </div>
+
+                <!-- 4. Branding & Strategy -->
+                <div class="card reveal">
+                    <div class="card-icon-wrapper">🎨</div>
+                    <h3>البراندينغ وإستراتيجية العلامة</h3>
+                    <p>بناء هوية بصرية واستراتيجية حضور متكاملة للمشاريع والعلامات:</p>
+                    <ul class="custom-list">
+                        <li>تصميم الهوية البصرية (Logo, Couleurs, Ligne graphique, Brand guidelines).</li>
+                        <li>تحديد إستراتيجية العلامة والرسالة وطريقة الظهور في السوشل ميديا.</li>
+                        <li>خدمة موجهة للعملاء الخارجيين ولمشاريع الشباب داخل "توعية".</li>
+                    </ul>
+                    <span class="service-tag">Branding & Strategy</span>
+                </div>
+
+                <!-- 5. Business in a Box (Idea Development & Sale) -->
+                <div class="card reveal box-featured" style="grid-column: span 2 / auto;">
+                    <div class="card-icon-wrapper">📦</div>
+                    <h3>بناء وبيع أفكار المشاريع (Business-in-a-Box)</h3>
+                    <p>خدمة موجهة للأشخاص ممن لديهم رأس مال ويرغبون في الاستثمار بدون فكرة سابقة أو خطة محددة:</p>
+                    <ul class="custom-list">
+                        <li>تدرس "توعية" السوق وتخلق فكرة مشروع كاملة ومدروسة (Business Plan, Concept, الهوية, خطة التسويق) وتبيعها للعميل كـ "مشروع جاهز للانطلاق".</li>
+                        <li>تقديم دعم شامل من الفكرة، إلى الهوية البصرية، والانطلاق الفعلي مع تقديم خدمات المونتاج والبراندينغ وتشكيل الفريق.</li>
+                        <li><strong>الأثر الاجتماعي:</strong> خلق فرص شغل إضافية مدفوعة الأجر للشباب المتكونين داخل توعية الذين يتولون تنفيذ إدارة هذه المشاريع (محتوى، هوية، وإدارة).</li>
+                    </ul>
+                    <span class="service-tag">Business-in-a-Box</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Vision & Mission Section -->
-    <section id="vision">
+    <section id="vision" style="background-color: #ffffff;">
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-badge">منهجنا</span>
@@ -472,21 +607,6 @@
                     <h3>الرسالة</h3>
                     <p>تقديم دورات تدريبية مكثفة ودعم مستمر لتطوير مهارات التفكير والعمل، إلى جانب استشارات رقمية متخصصة تُساعد كل شاب على تحويل شغفه ومهاراته إلى مصدر دخل ثابت ومستدام.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Overview -->
-    <section id="about" style="background-color: #ffffff;">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-badge">تعرّف علينا</span>
-                <h2 class="section-title">نظرة عامة على المشروع</h2>
-            </div>
-            <div class="card reveal" style="text-align: center; max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);">
-                <p style="font-size: 1.2rem; color: var(--text-color); font-weight: 600;">
-                    مشروع تجمع فيه بين التدريب العملي والاستشارات الرقمية؛ لنوفر مساراً واضحاً للشباب التونسي للانتقال من مرحلة التعلم إلى مرحلة كسب الدخل، وتطوير عقلية قادرة على التكيف والنجاح.
-                </p>
             </div>
         </div>
     </section>
