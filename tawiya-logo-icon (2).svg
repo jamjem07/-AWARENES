@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <defs>
+    <linearGradient id="goldCore" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E4C875"/>
+      <stop offset="55%" stop-color="#C79A3F"/>
+      <stop offset="100%" stop-color="#9C7A3C"/>
+    </linearGradient>
+    <linearGradient id="goldRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C79A3F"/>
+      <stop offset="100%" stop-color="#8C6A2C"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="86" cy="84" r="46" fill="none" stroke="url(#goldRing)"
+          stroke-width="9" stroke-linecap="round"
+          stroke-dasharray="245 289"
+          transform="rotate(133 86 84)"/>
+  <circle cx="86" cy="84" r="25" fill="url(#goldCore)"/>
+
+  <rect x="118" y="160" width="22" height="44" rx="5" fill="#1A1A1A"/>
+  <rect x="152" y="124" width="22" height="80" rx="5" fill="#1A1A1A"/>
+  <rect x="186" y="86"  width="22" height="118" rx="5" fill="#1A1A1A"/>
+</svg>
