@@ -7,465 +7,356 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     
     <style>
+        /* المتغيرات والألوان الاحترافية */
         :root {
-            --primary-color: #0d6efd;
-            --primary-gradient: linear-gradient(135deg, #0d6efd 0%, #0043a8 100%);
-            --accent-gold: #ffc107;
-            --dark-color: #0f172a;
-            --light-bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-color: #1e293b;
+            --primary: #2563eb; /* أزرق ملكي */
+            --secondary: #0ea5e9; /* سماوي ساطع */
+            --accent: #f59e0b; /* ذهبي للتميز */
+            --dark: #0f172a; /* كحلي داكن جداً */
+            --surface: #ffffff;
+            --bg-light: #f8fafc;
+            --text-main: #334155;
             --text-muted: #64748b;
-            --border-radius: 20px;
-            --box-shadow: 0 10px 30px -5px rgba(13, 110, 253, 0.08);
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient-premium: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(14, 165, 233, 0.1), 0 8px 10px -6px rgba(14, 165, 233, 0.1);
+            --shadow-glow: 0 0 25px rgba(37, 99, 235, 0.25);
+            
+            --transition-smooth: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        html { scroll-behavior: smooth; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: var(--light-bg);
-            color: var(--text-color);
+            background-color: var(--bg-light);
+            color: var(--text-main);
             line-height: 1.8;
             overflow-x: hidden;
+            position: relative;
         }
 
         .container {
-            max-width: 1140px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Top Bar Keyframes */
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.85; }
+        /* 🌟 أنيميشن الخلفية (Animated Blobs) 🌟 */
+        .bg-blobs {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            border-radius: 50%;
+            animation: floatBlob 15s infinite alternate ease-in-out;
+        }
+        .blob-1 { top: -10%; right: -10%; width: 400px; height: 400px; background: var(--secondary); }
+        .blob-2 { bottom: -10%; left: -10%; width: 500px; height: 500px; background: var(--primary); animation-delay: -5s; }
+        
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-50px, 50px) scale(1.1); }
         }
 
+        /* شريط التنبيهات */
         .top-bar {
-            background: var(--primary-gradient);
+            background: var(--gradient-primary);
             color: #fff;
             text-align: center;
-            padding: 9px 15px;
+            padding: 8px 15px;
             font-size: 0.95rem;
             font-weight: 700;
-            animation: pulseGlow 3s infinite ease-in-out;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 10;
         }
 
-        /* Header / Navbar */
+        /* 🌟 هيدر بتأثير الزجاج (Glassmorphism) 🌟 */
         header {
-            background-color: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-smooth);
         }
 
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 0;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .logo-container:hover {
-            transform: scale(1.03);
-        }
-
-        .logo-img {
-            height: 48px;
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 6px rgba(13, 110, 253, 0.15));
+            display: flex; justify-content: space-between; align-items: center; padding: 15px 0;
         }
 
         .logo-text {
             font-size: 1.8rem;
             font-weight: 900;
-            background: var(--primary-gradient);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+        
+        /* تأثير مميز لروابط القائمة */
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 50%;
+            transform: translateX(-50%);
+            width: 0; height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a:hover::before { width: 100%; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* 🌟 قسم البداية (Hero Section) 🌟 */
+        .hero {
+            padding: 80px 0 100px 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .hero h1 span {
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 700;
-            font-size: 1rem;
-            transition: var(--transition);
-            position: relative;
-            padding: 4px 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: -2px;
-            right: 0;
-            background: var(--primary-gradient);
-            border-radius: 2px;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Hero Section */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes floatImage {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .hero {
-            padding: 60px 0 80px 0;
-            text-align: center;
-            position: relative;
-            background: radial-gradient(circle at 50% 0%, rgba(13, 110, 253, 0.08) 0%, rgba(248, 250, 252, 0) 75%);
-        }
-
-        .hero-content {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .banner-container {
-            width: 100%;
-            margin-bottom: 35px;
-            overflow: hidden;
-            border-radius: 24px;
-            box-shadow: 0 20px 45px rgba(13, 110, 253, 0.15);
-            border: 4px solid #ffffff;
-            animation: floatImage 6s ease-in-out infinite;
-        }
-
-        .banner-img {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s ease;
-        }
-
-        .banner-container:hover .banner-img {
-            transform: scale(1.04);
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: var(--dark-color);
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             color: var(--text-muted);
-            max-width: 850px;
-            margin: 0 auto 35px auto;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
             font-weight: 600;
         }
 
-        /* Buttons */
+        /* 🌟 زر تفاعلي مع لمعان مستمر (Shimmer Button) 🌟 */
         .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--primary-gradient);
+            display: inline-flex; align-items: center; gap: 12px;
+            background: var(--gradient-primary);
             color: #fff;
-            padding: 16px 38px;
+            padding: 18px 45px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 800;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 25px rgba(13, 110, 253, 0.3);
-            transition: var(--transition);
+            font-size: 1.15rem;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
             position: relative;
             overflow: hidden;
+            transition: var(--transition-smooth);
+            border: 2px solid transparent;
         }
-
-        .btn-primary::before {
+        
+        .btn-primary::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: 0.6s;
+            top: -50%; left: -60%;
+            width: 20%; height: 200%;
+            background: rgba(255,255,255,0.4);
+            transform: rotate(30deg);
+            animation: shimmer 3s infinite;
         }
-
-        .btn-primary:hover::before {
-            left: 100%;
+        @keyframes shimmer {
+            0% { left: -60%; }
+            100% { left: 150%; }
         }
-
         .btn-primary:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(13, 110, 253, 0.45);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.5);
+            background: var(--surface);
+            color: var(--primary);
+            border: 2px solid var(--primary);
         }
+        .btn-primary:hover::after { display: none; } /* إخفاء اللمعة عند الوقوف عليه */
 
-        .btn-primary .arrow {
-            transition: transform 0.3s ease;
-        }
-
-        .btn-primary:hover .arrow {
-            transform: translateX(-5px);
-        }
-
-        /* Scroll Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
+        /* 🌟 العناوين والأقسام 🌟 */
+        .section-header { text-align: center; margin-bottom: 60px; }
         .section-badge {
-            background-color: rgba(13, 110, 253, 0.1);
-            color: var(--primary-color);
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.95rem;
             font-weight: 800;
             display: inline-block;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
+        .section-title { font-size: 2.5rem; font-weight: 900; color: var(--dark); }
+        .section-subtitle { color: var(--text-muted); font-size: 1.15rem; margin-top: 10px; }
+        section { padding: 90px 0; position: relative; }
 
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--dark-color);
-        }
-
-        .section-subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-top: 8px;
-        }
-
-        /* General Sections */
-        section {
-            padding: 80px 0;
-        }
-
-        /* Cards Grid */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 30px;
-        }
-
+        /* 🌟 نظام الشبكة والبطاقات (Cards) 🌟 */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; }
+        
         .card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 35px 28px;
-            box-shadow: var(--box-shadow);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            transition: var(--transition);
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: var(--transition-smooth);
             position: relative;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--primary-gradient);
-            opacity: 0;
-            transition: var(--transition);
+            display: flex; flex-direction: column;
+            z-index: 1;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 45px -10px rgba(13, 110, 253, 0.18);
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            border-color: rgba(37, 99, 235, 0.2);
         }
 
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        @keyframes iconBounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
+        /* أيقونات البطاقات */
         .card-icon-wrapper {
-            width: 65px;
-            height: 65px;
-            background: linear-gradient(135deg, rgba(13, 110, 253, 0.1) 0%, rgba(13, 110, 253, 0.03) 100%);
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            transition: var(--transition);
+            width: 75px; height: 75px;
+            background: rgba(37, 99, 235, 0.08);
+            border-radius: 22px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            transition: var(--transition-smooth);
+            color: var(--primary);
         }
-
         .card:hover .card-icon-wrapper {
-            animation: iconBounce 0.6s ease-in-out;
-            background: var(--primary-gradient);
+            background: var(--gradient-primary);
             color: #fff;
+            transform: rotateY(15deg) scale(1.1);
         }
 
-        .card h3 {
-            font-size: 1.45rem;
-            font-weight: 800;
-            color: var(--dark-color);
-            margin-bottom: 12px;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin-bottom: 15px;
-        }
-
-        .custom-list {
-            list-style: none;
-            margin-top: 10px;
-        }
-
+        .card h3 { font-size: 1.5rem; font-weight: 800; color: var(--dark); margin-bottom: 15px; }
+        .card p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 20px; line-height: 1.7; }
+        
+        .custom-list { list-style: none; margin-top: 10px; margin-bottom: 20px;}
         .custom-list li {
-            position: relative;
-            padding-right: 22px;
-            margin-bottom: 10px;
-            color: var(--text-color);
-            font-size: 0.95rem;
-            font-weight: 600;
+            position: relative; padding-right: 25px; margin-bottom: 12px;
+            color: var(--text-main); font-size: 1rem; font-weight: 600;
         }
-
         .custom-list li::before {
-            content: "✓";
-            position: absolute;
-            right: 0;
-            color: var(--primary-color);
-            font-weight: 900;
+            content: "✦"; position: absolute; right: 0; color: var(--secondary); font-size: 1.2rem;
         }
 
         .service-tag {
-            align-self: flex-start;
-            margin-top: auto;
-            padding: 5px 14px;
-            background: rgba(13, 110, 253, 0.08);
-            color: var(--primary-color);
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 800;
+            align-self: flex-start; margin-top: auto; padding: 6px 16px;
+            background: rgba(37, 99, 235, 0.08); color: var(--primary);
+            border-radius: 30px; font-size: 0.9rem; font-weight: 800;
+            transition: var(--transition-smooth);
         }
+        .card:hover .service-tag { background: var(--primary); color: #fff; }
 
-        /* Business in a box highlight card */
-        .box-featured {
-            background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
-            border: 2px solid rgba(13, 110, 253, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--dark-color);
+        /* 🌟 بطاقة الـ VIP (Business-in-a-Box) 🌟 */
+        .card.box-featured {
+            grid-column: 1 / -1; /* تأخذ العرض بالكامل أو سطر كامل */
+            background: var(--gradient-premium);
             color: #fff;
-            text-align: center;
-            padding: 40px 0;
-            margin-top: 60px;
-            border-top: 4px solid var(--primary-color);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+        @media (max-width: 900px) {
+            .card.box-featured { grid-template-columns: 1fr; }
+        }
+        .card.box-featured::before {
+            content: ''; position: absolute; top: 0; right: 0; width: 100%; height: 4px;
+            background: var(--gradient-gold);
+        }
+        .card.box-featured h3 { color: #fff; font-size: 1.8rem; }
+        .card.box-featured p { color: #cbd5e1; }
+        .card.box-featured .custom-list li { color: #f8fafc; }
+        .card.box-featured .custom-list li::before { color: var(--accent); }
+        .card.box-featured .card-icon-wrapper { background: rgba(245, 158, 11, 0.15); color: var(--accent); }
+        .card.box-featured:hover .card-icon-wrapper { background: var(--gradient-gold); color: #fff; }
+        .card.box-featured .service-tag { background: rgba(245, 158, 11, 0.2); color: var(--accent); }
+        .card.box-featured:hover .service-tag { background: var(--accent); color: var(--dark); }
+
+        /* 🌟 أنيميشن الظهور عند التمرير (Scroll Reveal) 🌟 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px) scale(0.98);
+            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
 
-        footer p {
-            color: #94a3b8;
-            font-size: 1rem;
-            font-weight: 600;
+        /* الفوتر */
+        footer {
+            background-color: var(--dark); color: #fff; text-align: center;
+            padding: 50px 0; border-top: 4px solid var(--primary);
+            position: relative; z-index: 2;
         }
+        footer p { color: #94a3b8; font-weight: 600; }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .hero-subtitle { font-size: 1.1rem; }
+            .hero h1 { font-size: 2.2rem; }
             .nav-links { display: none; }
-            .banner-img { max-height: 240px; }
-            .card { padding: 25px 20px; }
+            .card { padding: 30px 20px; }
+            .section-title { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- أشكال الخلفية المتحركة -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
     <!-- Top Bar -->
     <div class="top-bar">
-        🚀 مرحباً بكم في منصة توعية الرسمية لتمكين الشباب التونسي
+        🚀 منصة توعية الرسمية لتمكين الشباب  - طريقك نحو الاستقلالية المادية
     </div>
 
     <!-- Header / Navbar -->
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo-container">
-                    <img src="tawiya-logo-icon (2).svg" alt="شعار توعية" class="logo-img" onerror="this.style.display='none'">
-                    <span class="logo-text">توعية TAWIYA</span>
+                <a href="#" class="logo-text">
+                    <span style="font-size: 2.2rem; filter: hue-rotate(15deg);">💡</span> توعية
                 </a>
                 <ul class="nav-links">
                     <li><a href="#about">عن المشروع</a></li>
@@ -479,164 +370,148 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container hero-content">
-            <div class="banner-container">
-                <img src="banner.jpg" alt="غلاف مشروع توعية" class="banner-img" onerror="this.parentElement.style.display='none'">
-            </div>
-
-            <h1>مشروع توعية وتمكين معرفي رقمي للشباب التونسي</h1>
+        <div class="container reveal">
+            <h1>ابنِ مستقبلك مع <span>مشروع توعية</span></h1>
             <p class="hero-subtitle">
-                بيئة تمكينية تهدف لتطوير التفكير الشبابي، وصقل المهارات الحية، وتقديم استشارات وحلول رقمية تفتح آفاق الاستقلالية المادية وسوق العمل الحديث.
+                بيئة تمكينية احترافية تهدف لتطوير التفكير الشبابي، وصقل المهارات الحية، وتقديم استشارات وحلول رقمية تفتح آفاق الاستقلالية المادية وسوق العمل الحديث.
             </p>
             <a href="#services" class="btn-primary">
-                <span>استكشف مجالاتنا</span>
+                <span>اكتشف مجالاتنا الآن</span>
                 <span class="arrow">←</span>
             </a>
         </div>
     </section>
 
-    <!-- Project Overview -->
-    <section id="about" style="background-color: #ffffff;">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-badge">تعرّف علينا</span>
-                <h2 class="section-title">نظرة عامة على المشروع</h2>
-            </div>
-            <div class="card reveal" style="text-align: center; max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);">
-                <p style="font-size: 1.2rem; color: var(--text-color); font-weight: 600;">
-                    مشروع تجمع فيه بين التدريب العملي والاستشارات الرقمية؛ لنوفر مساراً واضحاً للشباب التونسي للانتقال من مرحلة التعلم إلى مرحلة كسب الدخل، وتطوير عقلية قادرة على التكيف والنجاح.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVICES & DEPARTMENTS SECTION -->
+    <!-- SERVICES SECTION -->
     <section id="services">
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-badge">مجالات العمل والخدمات</span>
                 <h2 class="section-title">أقسام ومجالات مشروع توعية</h2>
-                <p class="section-subtitle">منظومة متكاملة لدعم الشباب والمشاريع من التفكير إلى التنفيذ</p>
+                <p class="section-subtitle">منظومة متكاملة لدعم الشباب والمشاريع من التفكير إلى التنفيذ الاحترافي</p>
             </div>
 
             <div class="grid-3">
-                <!-- 1. Coaching & Consultation -->
+                <!-- 1. Coaching -->
                 <div class="card reveal">
-                    <div class="card-icon-wrapper">🤝</div>
+                    <div class="card-icon-wrapper">🎯</div>
                     <h3>قسم الإستشارات والمرافقة</h3>
                     <p>مرافقة شاملة ومباشرة للشباب لرسم خطط عملية واضحة للنجاح:</p>
                     <ul class="custom-list">
-                        <li>جلسات فردية وجماعية لمرافقة الشاب في اختيار مساره ووضع خطة عمل.</li>
-                        <li>المساعدة في تفسير الخدمات والقدرة على التواصل الفعّال.</li>
-                        <li>متابعة دورية لقياس التقدم وتصحيح المسار باستمرار.</li>
+                        <li>جلسات فردية وجماعية لاختيار المسار المهني.</li>
+                        <li>تفسير الخدمات وتطوير مهارات التواصل الفعّال.</li>
+                        <li>متابعة دورية لقياس التقدم وتصحيح المسار.</li>
                     </ul>
                     <span class="service-tag">Coaching & Guidance</span>
                 </div>
 
-                <!-- 2. Mindset Formation -->
+                <!-- 2. Mindset -->
                 <div class="card reveal">
                     <div class="card-icon-wrapper">🧠</div>
                     <h3>قسم تكوين العقلية (Mindset)</h3>
                     <p>بناء الشخصية القيادية والعقلية المرنة القادرة على الإنتاج والمواجهة:</p>
                     <ul class="custom-list">
-                        <li>تطوير مستوى الانضباط الشخصي والالتزام بالنتائج.</li>
-                        <li>إدارة الوقت والتخطيط الشخصي للإنتاجية.</li>
-                        <li>فن التعامل مع الفشل وتحويل التحديات إلى فرص.</li>
+                        <li>تطوير الانضباط الشخصي والالتزام.</li>
+                        <li>إدارة الوقت والتخطيط للإنتاجية.</li>
+                        <li>التعامل مع الفشل وتحويل التحديات لفرص.</li>
                     </ul>
                     <span class="service-tag">Mindset & Growth</span>
                 </div>
 
-                <!-- 3. Video Editing Services -->
+                <!-- 3. Video Editing -->
                 <div class="card reveal">
                     <div class="card-icon-wrapper">🎬</div>
                     <h3>قسم خدمات المونتاج</h3>
-                    <p>وحدة إنتاج داخلية متخصصة في صناعة وتعديل الفيديو الجذاب للعملاء:</p>
+                    <p>وحدة إنتاج داخلية متخصصة في صناعة وتعديل الفيديو الجذاب:</p>
                     <ul class="custom-list">
-                        <li>إنتاج وتعديل فيديوهات وسائل التواصل الاجتماعي (Shorts/Reels).</li>
+                        <li>إنتاج فيديوهات السوشيال ميديا (Shorts/Reels).</li>
                         <li>صناعة الفيديوهات الإعلانية الاحترافية.</li>
-                        <li>مونتاج وصناعة محتوى الـ Gaming والترفيه.</li>
+                        <li>مونتاج محتوى الـ Gaming والترفيه.</li>
                     </ul>
                     <span class="service-tag">Video Production</span>
                 </div>
 
-                <!-- 4. Branding & Strategy -->
+                <!-- 4. Branding -->
                 <div class="card reveal">
-                    <div class="card-icon-wrapper">🎨</div>
+                    <div class="card-icon-wrapper">✨</div>
                     <h3>البراندينغ وإستراتيجية العلامة</h3>
                     <p>بناء هوية بصرية واستراتيجية حضور متكاملة للمشاريع والعلامات:</p>
                     <ul class="custom-list">
-                        <li>تصميم الهوية البصرية (Logo, Couleurs, Ligne graphique, Brand guidelines).</li>
-                        <li>تحديد إستراتيجية العلامة والرسالة وطريقة الظهور في السوشل ميديا.</li>
-                        <li>خدمة موجهة للعملاء الخارجيين ولمشاريع الشباب داخل "توعية".</li>
+                        <li>تصميم الهوية البصرية (Logo, Colors, Guidelines).</li>
+                        <li>إستراتيجية الرسالة والظهور الرقمي.</li>
+                        <li>خدمات للعملاء وللشباب المتكونين بالمنصة.</li>
                     </ul>
                     <span class="service-tag">Branding & Strategy</span>
                 </div>
 
-                <!-- 5. Business in a Box (Idea Development & Sale) -->
-                <div class="card reveal box-featured" style="grid-column: span 2 / auto;">
-                    <div class="card-icon-wrapper">📦</div>
-                    <h3>بناء وبيع أفكار المشاريع (Business-in-a-Box)</h3>
-                    <p>خدمة موجهة للأشخاص ممن لديهم رأس مال ويرغبون في الاستثمار بدون فكرة سابقة أو خطة محددة:</p>
-                    <ul class="custom-list">
-                        <li>تدرس "توعية" السوق وتخلق فكرة مشروع كاملة ومدروسة (Business Plan, Concept, الهوية, خطة التسويق) وتبيعها للعميل كـ "مشروع جاهز للانطلاق".</li>
-                        <li>تقديم دعم شامل من الفكرة، إلى الهوية البصرية، والانطلاق الفعلي مع تقديم خدمات المونتاج والبراندينغ وتشكيل الفريق.</li>
-                        <li><strong>الأثر الاجتماعي:</strong> خلق فرص شغل إضافية مدفوعة الأجر للشباب المتكونين داخل توعية الذين يتولون تنفيذ إدارة هذه المشاريع (محتوى، هوية، وإدارة).</li>
-                    </ul>
-                    <span class="service-tag">Business-in-a-Box</span>
+                <!-- 5. Business in a Box (VIP CARD) -->
+                <div class="card box-featured reveal">
+                    <div>
+                        <div class="card-icon-wrapper">👑</div>
+                        <h3>بناء وبيع أفكار المشاريع<br><span style="color: var(--accent); font-size: 1.4rem;">(Business-in-a-Box)</span></h3>
+                        <p>خدمة VIP موجهة للمستثمرين وأصحاب رأس المال الباحثين عن مشاريع جاهزة ومدروسة للانطلاق الفوري.</p>
+                        <span class="service-tag">Premium Investment</span>
+                    </div>
+                    <div>
+                        <ul class="custom-list">
+                            <li>خلق فكرة مشروع كاملة (Business Plan, Concept, الهوية، خطة التسويق) كـ "مشروع جاهز".</li>
+                            <li>دعم شامل من الفكرة والانطلاق الفعلي مع توفير المونتاج والبراندينغ وتشكيل الفريق.</li>
+                            <li><strong>الأثر الاجتماعي:</strong> توفير فرص شغل مدفوعة للشباب المتكونين في "توعية" لتنفيذ وإدارة هذه المشاريع.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Vision & Mission Section -->
-    <section id="vision" style="background-color: #ffffff;">
+    <section id="vision">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-badge">منهجنا</span>
+                <span class="section-badge">منهجنا وهدفنا</span>
                 <h2 class="section-title">الرؤية والرسالة</h2>
-                <p class="section-subtitle">نظرتنا ونشاطنا نحو صناعة المستقبل</p>
             </div>
-            <div class="grid-2">
+            <div class="grid-3" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
                 <div class="card reveal">
                     <div class="card-icon-wrapper">👁️</div>
                     <h3>الرؤية</h3>
-                    <p>بناء جيل شبابي واعٍ ومبتكر، يمتلك فكراً ريادياً مهارياً ويمتلك أدوات العصر لتحقيق الاستقلالية المادية وصناعة فرصه بنفسه.</p>
+                    <p>بناء جيل شبابي واعٍ ومبتكر، يمتلك فكراً ريادياً مهارياً وأدوات العصر لتحقيق الاستقلالية المادية وصناعة فرصه بنفسه في سوق العمل الحديث.</p>
                 </div>
                 <div class="card reveal">
-                    <div class="card-icon-wrapper">🎯</div>
+                    <div class="card-icon-wrapper">🚀</div>
                     <h3>الرسالة</h3>
-                    <p>تقديم دورات تدريبية مكثفة ودعم مستمر لتطوير مهارات التفكير والعمل، إلى جانب استشارات رقمية متخصصة تُساعد كل شاب على تحويل شغفه ومهاراته إلى مصدر دخل ثابت ومستدام.</p>
+                    <p>تقديم دورات تدريبية ومرافقة مستمرة لتطوير التفكير والعمل، مع استشارات رقمية تُساعد كل شاب على تحويل شغفه إلى مصدر دخل مستدام.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Payment & Services Section -->
+    <!-- Payment Section -->
     <section id="pricing">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-badge">معاملات آمنة</span>
+                <span class="section-badge">معاملات آمنة وموثوقة</span>
                 <h2 class="section-title">طرق الدفع والإستخلاص</h2>
-                <p class="section-subtitle">نوفر خيارات دفع مرنة وآمنة لتسهيل التحاقك بالدورات وحجز الاستشارات الرقمية</p>
+                <p class="section-subtitle">خيارات مرنة لتسهيل التحاقك بالدورات وحجز الاستشارات</p>
             </div>
 
             <div class="grid-3">
-                <div class="card reveal" style="text-align: center;">
-                    <div class="card-icon-wrapper" style="margin: 0 auto 24px auto;">📱</div>
-                    <h3>تطبيق D17 / حوالة بريدية</h3>
-                    <p>الدفع السريع والمباشر عبر تطبيق D17 الخاص بالبريد التونسي أو عن طريق حوالة بريدية (Mandat Minute).</p>
+                <div class="card reveal" style="text-align: center; align-items: center;">
+                    <div class="card-icon-wrapper">📱</div>
+                    <h3>تطبيق D17 / حوالة</h3>
+                    <p>الدفع المباشر عبر تطبيق D17 الخاص بالبريد التونسي أو عن طريق حوالة بريدية (Mandat Minute).</p>
                 </div>
 
-                <div class="card reveal" style="text-align: center;">
-                    <div class="card-icon-wrapper" style="margin: 0 auto 24px auto;">🏦</div>
+                <div class="card reveal" style="text-align: center; align-items: center;">
+                    <div class="card-icon-wrapper">🏦</div>
                     <h3>تحويل بنكي (Virement)</h3>
-                    <p>إمكانية الدفع عبر تحويل بنكي مباشر إلى حسابنا البنكي، مع الاستظهار بـ (Reçu) التأكيد.</p>
+                    <p>إمكانية الدفع عبر تحويل بنكي مباشر إلى حسابنا، مع الاستظهار بوصل (Reçu) التأكيد.</p>
                 </div>
 
-                <div class="card reveal" style="text-align: center;">
-                    <div class="card-icon-wrapper" style="margin: 0 auto 24px auto;">🤝</div>
+                <div class="card reveal" style="text-align: center; align-items: center;">
+                    <div class="card-icon-wrapper">🤝</div>
                     <h3>دفع مباشر (نقداً)</h3>
-                    <p>الدفع نقداً عند الحضور المباشر للدورات التدريبية أو المقابلات الاستشارية.</p>
+                    <p>الدفع نقداً عند الحضور المباشر للدورات التدريبية أو المقابلات الاستشارية في المقر.</p>
                 </div>
             </div>
         </div>
@@ -645,28 +520,36 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>جميع الحقوق محفوظة © مشروع توعية (TAWIYA)</p>
+            <p>جميع الحقوق محفوظة © مشروع توعية (AWARENESS) 2026</p>
         </div>
     </footer>
 
-    <!-- JavaScript For Scroll Reveal Animations -->
+    <!-- JavaScript For Advanced Scroll Reveal -->
     <script>
-        function revealOnScroll() {
+        document.addEventListener("DOMContentLoaded", () => {
             const reveals = document.querySelectorAll('.reveal');
-            const windowHeight = window.innerHeight;
-            const elementVisible = 100;
+            
+            const revealOptions = {
+                threshold: 0.15, // يظهر العنصر عندما يظهر 15% منه في الشاشة
+                rootMargin: "0px 0px -50px 0px"
+            };
 
-            reveals.forEach((element) => {
-                const elementTop = element.getBoundingClientRect().top;
-                if (elementTop < windowHeight - elementVisible) {
-                    element.classList.add('active');
-                }
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('active');
+                        // إيقاف المراقبة بعد الظهور الأول لتقليل استهلاك موارد المتصفح
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
             });
-        }
-
-        window.addEventListener('scroll', revealOnScroll);
-        // Initial check on load
-        revealOnScroll();
+        });
     </script>
 </body>
 </html>
